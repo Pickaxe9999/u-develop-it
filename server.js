@@ -22,8 +22,34 @@ const db = mysql.createConnection(
 
 //return all the data in the candidates table
 db.query('SELECT * FROM candidates', (err ,rows) => {
-    console.log(rows);
+    //console.log(rows);
 })
+
+//select a single candidate from the table
+// db.query(`SELECT * FROM candidates WHERE id = ?`, 1, (err, row) => {
+//     if(err){
+//         console.log(err);
+//     }
+//     console.log(row);
+// })
+
+//delete a candidate
+// db.query('DELETE FROM candidates WHERE id = ?', 1, (err, result) => {
+//     if(err){
+//         console.log(err);
+//     }
+//     console.log(result);
+// })
+
+//create a candidate
+// const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected) VALUES (?, ?, ?, ?)`;
+// const params = [1, 'Ronald', 'Firbank', 1];
+// db.query(sql, params, (err, result) => {
+//     if(err){
+//         console.log(err);
+//     }
+//     console.log(result);
+// })
 
 //default for if a requeest does not exist
 app.use((req, res) => {
