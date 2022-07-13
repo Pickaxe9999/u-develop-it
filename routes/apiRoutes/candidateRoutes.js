@@ -1,5 +1,5 @@
 const express = require('express');
-const router = require('express').Router();
+const router = express.Router();
 const db = require('../../db/connection.js');
 const inputCheck = require('../../utils/inputCheck.js');
 
@@ -36,28 +36,6 @@ router.get('/candidate/:id', (req, res) => {
     })
 })
 
-//delete a candidate
-router.delete('/candidate/:id', (req, res) =>{
-    const sql = `DELETE FROM candidates WHERE id = ?`;
-    const params = [req.params.id];
-
-    db.query(sql, params, (err, result) => {
-        if(err){
-            res.statusMessage(400).json({error: message});
-        }else if(!result.affectedRows){
-            res.json({
-                message: 'Candidate not found!'
-            })
-        }else{
-            res.json({
-                message: 'Candidate Deleted',
-                changes: result.affectedRows,
-                id: req.params.id
-            })
-        }
-    })
-})
-
 //create a candidate
 router.post('/candidate', ({body}, res) => {
     const errors = inputCheck(body, 'first_name', 'last_name', 'industry_connected');
@@ -79,6 +57,28 @@ router.post('/candidate', ({body}, res) => {
             message: 'success',
             data: body
         })
+    })
+})
+
+//delete a candidate
+router.delete('/candidate/:id', (req, res) =>{
+    const sql = `DELETE FROM candidates WHERE id = ?`;
+    const params = [req.params.id];
+
+    db.query(sql, params, (err, result) => {
+        if(err){
+            res.statusMessage(400).json({error: message});
+        }else if(!result.affectedRows){
+            res.json({
+                message: 'Candidate not found!'
+            })
+        }else{
+            res.json({
+                message: 'Candidate Deleted',
+                changes: result.affectedRows,
+                id: req.params.id
+            })
+        }
     })
 })
 

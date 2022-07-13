@@ -1,8 +1,8 @@
-const router = require('express').Router();
-const candidateRoutes = require('./candidateRoutes.js');
-const partyRoutes = require('./partyRoutes');
+const express = require('express')
+const router = express.Router();
 
-router.use(candidateRoutes);
-router.use(partyRoutes);
+router.use(require('./candidateRoutes.js'));
+router.use(require('./partyRoutes'));
+router.use(require('./voterRoutes'));
 
 module.exports = router;
